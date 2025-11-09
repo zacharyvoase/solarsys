@@ -9,16 +9,14 @@ import { theme as mantineTheme } from './mantineTheme';
 function App() {
   return (
     <MantineProvider theme={mantineTheme} defaultColorScheme="auto">
-      <Stack style={{ width: 'auto' }}>
+      <div className={classes.container}>
         <Title order={1} className={classes.header}>
           SolarSystem
         </Title>
-        <Group align="start">
-          <ThemeDisplay />
-          <PreviewCard />
-          <SingleColorEditorCard />
-        </Group>
-      </Stack>
+        <ThemeDisplay />
+        <PreviewCard />
+        <SingleColorEditorCard />
+      </div>
     </MantineProvider>
   );
 }

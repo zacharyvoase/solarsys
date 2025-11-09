@@ -7,10 +7,7 @@ import { themeAtom, selectedColorAtom, preferencesAtom } from '../state';
 export default function ThemeDisplay() {
   const [preferences, setPreferences] = useAtom(preferencesAtom);
   return (
-    <Card
-      style={{ width: 'fit-content', boxSizing: 'content-box' }}
-      padding="md"
-    >
+    <Card padding="md">
       <Stack>
         <Box
           display="grid"

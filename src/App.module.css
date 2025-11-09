@@ -1,0 +1,35 @@
+.container {
+  width: fit-content;
+  margin-inline: auto;
+  padding-inline: var(--mantine-spacing-lg);
+  margin-block: var(--mantine-spacing-sm);
+  gap: var(--mantine-spacing-sm);
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+
+  h1 {
+    grid-column: 1 / span 3;
+    justify-self: center;
+  }
+
+
+  @media (max-width: $mantine-breakpoint-lg) {
+    width: 100%;
+    padding-inline: var(--mantine-spacing-md);
+    grid-template-columns: repeat(2, auto);
+
+    h1 {
+      grid-column: 1 / span 2;
+    }
+  }
+
+  @media (max-width: $mantine-breakpoint-md) {
+    width: 100%;
+    padding-inline: var(--mantine-spacing-sm);
+    grid-template-columns: auto;
+
+    h1 {
+      grid-column: 1 / span 1;
+    }
+  }
+}

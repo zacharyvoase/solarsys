@@ -8,7 +8,7 @@ import type { SolarizedTheme, SolarizedThemeSlot } from '../solarized';
 export default function PreviewCard() {
   return (
     <Card>
-      <Stack style={{ width: 400 }}>
+      <Stack>
         <CardTitle>Preview</CardTitle>
         <PreviewBlock mode="dark" />
         <PreviewBlock mode="light" />
