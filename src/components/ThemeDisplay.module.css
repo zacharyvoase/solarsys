@@ -9,12 +9,12 @@
   border-radius: var(--mantine-radius-sm);
 
   &.selected {
-    outline: 1px solid var(--mantine-color-grape-7);
-    box-shadow: 0 0 3px 1px var(--mantine-color-grape-7);
+    outline: 1px solid var(--mantine-color-blue-7);
+    box-shadow: 0 0 3px 2px var(--mantine-color-blue-7);
   }
 
   [data-mantine-color-scheme='dark'] &.selected {
-    outline: 1px solid var(--mantine-color-grape-3);
-    box-shadow: 0 0 3px 1px var(--mantine-color-grape-3);
+    outline: 1px solid var(--mantine-color-blue-3);
+    box-shadow: 0 0 3px 2px var(--mantine-color-blue-3);
   }
 }
