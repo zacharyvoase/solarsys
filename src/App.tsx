@@ -1,4 +1,4 @@
-import { Group, MantineProvider, Stack, Title } from '@mantine/core';
+import { MantineProvider, Title } from '@mantine/core';
 
 import classes from './App.module.css';
 import PreviewCard from './components/PreviewCard';

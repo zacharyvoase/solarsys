@@ -12,7 +12,6 @@
     justify-self: center;
   }
 
-
   @media (max-width: $mantine-breakpoint-lg) {
     width: 100%;
     padding-inline: var(--mantine-spacing-md);
