@@ -14,7 +14,7 @@ import {
 export const ThemeStorage = createJSONStorage<SolarizedTheme>(
   () => localStorage,
   {
-    reviver: (key, value) => {
+    reviver: (_key, value) => {
       // Check if this is a color property by looking at the value structure
       if (
         value &&
@@ -47,7 +47,7 @@ export const ThemeStorage = createJSONStorage<SolarizedTheme>(
 
       return value;
     },
-    replacer: (key, value) => {
+    replacer: (_key, value) => {
       // Serialize Color objects to a plain object format
       if (value instanceof Color) {
         return value.toJSON();
