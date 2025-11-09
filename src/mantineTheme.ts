@@ -25,6 +25,10 @@ export const theme = createTheme({
       `oklch(0.10 0.0236 ${darkHue})`,
     ],
   },
+  headings: {
+    fontFamily: '"Russo One", sans-serif',
+    fontWeight: '400',
+  },
   components: {
     Card: {
       defaultProps: {
@@ -39,15 +43,6 @@ export const theme = createTheme({
     Input: {
       classNames: {
         input: 'input-transparent',
-      },
-    },
-    Title: {
-      styles: {
-        root: {
-          fontFamily: '"Russo One", sans-serif',
-          fontWeight: 400,
-          textTransform: 'uppercase',
-        },
       },
     },
   },
