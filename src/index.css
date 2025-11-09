@@ -1,0 +1,65 @@
+body {
+  background-image:
+    radial-gradient(
+      circle at 20% 30%,
+      color-mix(in srgb, var(--mantine-color-grape-2) 50%, transparent 50%),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      color-mix(in srgb, var(--mantine-color-orange-2) 50%, transparent 50%),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 40% 80%,
+      color-mix(in srgb, var(--mantine-color-blue-2) 50%, transparent 50%),
+      transparent 40%
+    );
+  background-attachment: fixed;
+}
+
+[data-mantine-color-scheme='dark'] body {
+  background-image:
+    radial-gradient(
+      circle at 20% 30%,
+      color-mix(in srgb, var(--mantine-color-grape-9) 50%, transparent 50%),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      color-mix(in srgb, var(--mantine-color-orange-9) 50%, transparent 50%),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 40% 80%,
+      color-mix(in srgb, var(--mantine-color-blue-9) 50%, transparent 50%),
+      transparent 40%
+    );
+  background-color: color-mix(
+    in srgb,
+    var(--mantine-color-dark-8),
+    transparent 30%
+  );
+}
+
+h1 {
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  text-transform: uppercase;
+  font-size: 24px;
+}
+
+.paper-transparent {
+  background-color: color-mix(
+    in srgb,
+    var(--mantine-color-body),
+    transparent 40%
+  );
+  backdrop-filter: blur(10px);
+}
+
+.input-transparent {
+  background-color: color-mix(in srgb, var(--input-bg), transparent 50%);
+}
