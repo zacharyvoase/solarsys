@@ -36,6 +36,35 @@ export type SolarizedThemeSlot =
   | 'lightEmphasis'
   | 'lightSecondary';
 
+export function resolveSlotToColorName(
+  slot: SolarizedThemeSlot | SolarizedThemeColorName
+): SolarizedThemeColorName {
+  switch (slot) {
+    case 'darkBg':
+      return 'base03';
+    case 'darkFg':
+      return 'base0';
+    case 'darkHighlight':
+      return 'base02';
+    case 'darkEmphasis':
+      return 'base1';
+    case 'darkSecondary':
+      return 'base01';
+    case 'lightBg':
+      return 'base3';
+    case 'lightFg':
+      return 'base00';
+    case 'lightHighlight':
+      return 'base2';
+    case 'lightEmphasis':
+      return 'base01';
+    case 'lightSecondary':
+      return 'base1';
+    default:
+      return slot;
+  }
+}
+
 export const DARK_NAMES: SolarizedThemeColorName[] = [
   'base03',
   'base02',

@@ -7,12 +7,13 @@ import {
   getFgColor,
 } from '../solarized';
 import { themeAtom, selectedColorAtom, preferencesAtom } from '../state';
+import classes from './ThemeDisplay.module.css';
 
 export default function ThemeDisplay() {
   const [preferences, setPreferences] = useAtom(preferencesAtom);
   const [, setTheme] = useAtom(themeAtom);
   return (
-    <Card padding="md">
+    <Card padding="md" style={{ gridArea: 'ThemeDisplay' }}>
       <Stack>
         <Box
           display="grid"
@@ -20,10 +21,8 @@ export default function ThemeDisplay() {
             gridTemplateColumns: 'repeat(2, 1fr)',
             gridTemplateRows: 'repeat(8, auto)',
             gridAutoFlow: 'column',
-            gap: 0,
-            overflow: 'hidden',
+            gap: 'var(--mantine-spacing-md)',
           }}
-          bdrs="md"
         >
           <ColorBox name="base03" uses={['dark bg']} />
           <ColorBox name="base02" uses={['dark highlight']} />
@@ -111,17 +110,10 @@ function ColorBox({
   const fgColor = getFgColor(color).toString({ format: 'oklch' });
   return (
     <Box
+      className={[classes.colorBox, selected ? classes.selected : ''].join(' ')}
       style={{
         backgroundColor: color.to('srgb').toString(),
         color: fgColor,
-        fontFamily: 'var(--mantine-font-family-monospace)',
-        lineHeight: 1.1,
-        fontSize: '12px',
-        fontWeight: 500,
-        boxSizing: 'content-box',
-        padding: 16,
-        border: 'none',
-        boxShadow: selected ? `inset 0 0 3px 1px ${fgColor}` : 'none',
       }}
       onClick={onClick}
     >

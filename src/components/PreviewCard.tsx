@@ -1,13 +1,17 @@
 import { Box, Card, Stack } from '@mantine/core';
 import { useAtom } from 'jotai';
 
-import { themeAtom } from '../state';
+import { selectedColorAtom, themeAtom } from '../state';
 import CardTitle from './CardTitle';
-import type { SolarizedTheme, SolarizedThemeSlot } from '../solarized';
+import {
+  resolveSlotToColorName,
+  type SolarizedThemeColorName,
+  type SolarizedThemeSlot,
+} from '../solarized';
 
 export default function PreviewCard() {
   return (
-    <Card>
+    <Card style={{ gridArea: 'PreviewCard', alignSelf: 'start' }}>
       <Stack>
         <CardTitle>Preview</CardTitle>
         <PreviewBlock mode="dark" />
@@ -55,12 +59,14 @@ function PreviewBlock({ mode }: { mode: 'dark' | 'light' }) {
 function PreviewChunk({
   slot,
 }: {
-  slot: keyof SolarizedTheme | SolarizedThemeSlot;
+  slot: SolarizedThemeColorName | SolarizedThemeSlot;
 }) {
   const [theme] = useAtom(themeAtom);
+  const [, setSelectedColor] = useAtom(selectedColorAtom);
   return (
     <>
       <span
+        onClick={() => setSelectedColor(resolveSlotToColorName(slot))}
         style={{
           fontWeight: slot.endsWith('Emphasis') ? 'bold' : 'normal',
           color: slot.endsWith('Highlight')

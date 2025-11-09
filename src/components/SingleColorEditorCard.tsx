@@ -1,4 +1,4 @@
-import { Card, Stack, Text } from '@mantine/core';
+import { Card, Input, Stack, Text } from '@mantine/core';
 import type Color from 'colorjs.io';
 import { useAtom } from 'jotai';
 
@@ -12,7 +12,7 @@ export default function SingleColorEditorCard() {
 
   if (!selectedColor) {
     return (
-      <Card>
+      <Card style={{ gridArea: 'EditorCard' }}>
         <CardTitle>Edit</CardTitle>
         <Text variant="text">Select a color to edit</Text>
       </Card>
@@ -34,36 +34,39 @@ function EditorCard({
   const color = clampAndRound(selectedColor.to('okhsl'));
 
   return (
-    <Card>
-      <Stack style={{ width: 400 }}>
+    <Card style={{ gridArea: 'EditorCard' }}>
+      <Stack>
         <CardTitle>Edit {selectedColorName}</CardTitle>
-        <Text>Hue: {color.h}</Text>
-        <OKComponentSlider
-          baseColor={color}
-          component="hue"
-          value={color.h!}
-          onChange={(h) => {
-            setSelectedColor((c) => setOkHslComponent(c, 'hue', h));
-          }}
-        />
-        <Text>Saturation: {color.s}</Text>
-        <OKComponentSlider
-          baseColor={color}
-          component="saturation"
-          value={color.s!}
-          onChange={(s) => {
-            setSelectedColor((c) => setOkHslComponent(c, 'saturation', s));
-          }}
-        />
-        <Text>Lightness: {color.l}</Text>
-        <OKComponentSlider
-          baseColor={color}
-          component="lightness"
-          value={color.l!}
-          onChange={(l) => {
-            setSelectedColor((c) => setOkHslComponent(c, 'lightness', l));
-          }}
-        />
+        <Input.Wrapper label="Hue" description={color.h!.toFixed(0)}>
+          <OKComponentSlider
+            baseColor={color}
+            component="hue"
+            value={color.h!}
+            onChange={(h) => {
+              setSelectedColor((c) => setOkHslComponent(c, 'hue', h));
+            }}
+          />
+        </Input.Wrapper>
+        <Input.Wrapper label="Saturation" description={color.s!.toFixed(2)}>
+          <OKComponentSlider
+            baseColor={color}
+            component="saturation"
+            value={color.s!}
+            onChange={(s) => {
+              setSelectedColor((c) => setOkHslComponent(c, 'saturation', s));
+            }}
+          />
+        </Input.Wrapper>
+        <Input.Wrapper label="Lightness" description={color.l!.toFixed(2)}>
+          <OKComponentSlider
+            baseColor={color}
+            component="lightness"
+            value={color.l!}
+            onChange={(l) => {
+              setSelectedColor((c) => setOkHslComponent(c, 'lightness', l));
+            }}
+          />
+        </Input.Wrapper>
       </Stack>
     </Card>
   );

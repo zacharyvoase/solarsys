@@ -1,4 +1,4 @@
-import { MantineProvider, Title } from '@mantine/core';
+import { Group, MantineProvider, Title } from '@mantine/core';
 
 import classes from './App.module.css';
 import PreviewCard from './components/PreviewCard';
@@ -10,9 +10,10 @@ function App() {
   return (
     <MantineProvider theme={mantineTheme} defaultColorScheme="auto">
       <div className={classes.container}>
-        <Title order={1} className={classes.header}>
-          SolarSystem
-        </Title>
+        <Group className={classes.header}>
+          <Title order={1}>SolarSystem</Title>
+        </Group>
+
         <ThemeDisplay />
         <PreviewCard />
         <SingleColorEditorCard />

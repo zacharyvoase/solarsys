@@ -55,7 +55,7 @@ h1 {
   background-color: color-mix(
     in srgb,
     var(--mantine-color-body),
-    transparent 40%
+    transparent 50%
   );
   backdrop-filter: blur(10px);
 }
