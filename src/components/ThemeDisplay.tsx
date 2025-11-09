@@ -1,11 +1,16 @@
-import { Box, Card, Stack, Switch } from '@mantine/core';
+import { Box, Button, Card, Stack, Switch } from '@mantine/core';
 import { useAtom } from 'jotai';
 
-import { type SolarizedThemeColorName, getFgColor } from '../solarized';
+import {
+  SOLARIZED_DEFAULT,
+  type SolarizedThemeColorName,
+  getFgColor,
+} from '../solarized';
 import { themeAtom, selectedColorAtom, preferencesAtom } from '../state';
 
 export default function ThemeDisplay() {
   const [preferences, setPreferences] = useAtom(preferencesAtom);
+  const [, setTheme] = useAtom(themeAtom);
   return (
     <Card padding="md">
       <Stack>
@@ -77,6 +82,9 @@ export default function ThemeDisplay() {
             }));
           }}
         />
+        <Button variant="light" onClick={() => setTheme(SOLARIZED_DEFAULT)}>
+          Reset to Solarized Default
+        </Button>
       </Stack>
     </Card>
   );
