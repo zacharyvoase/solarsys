@@ -1,4 +1,4 @@
-import { Box, Button, Card, Stack, Switch, Group } from '@mantine/core';
+import { Box, Button, Card, Stack, Switch, Divider } from '@mantine/core';
 import { useAtom } from 'jotai';
 
 import {
@@ -52,6 +52,9 @@ export default function ThemeDisplay() {
           <ColorBox name="cyan" contrastDark contrastLight />
           <ColorBox name="green" contrastDark contrastLight />
         </Box>
+        <Card.Section>
+          <Divider />
+        </Card.Section>
         <Switch
           label="Link dark hues"
           checked={preferences.linkDarkHues}
@@ -82,15 +85,16 @@ export default function ThemeDisplay() {
             }));
           }}
         />
-        <Group justify="space-between" wrap="nowrap">
-          <Button
-            variant="light"
-            onClick={() => setTheme(SOLARIZED_DEFAULT)}
-            style={{ flex: 1 }}
-          >
-            Reset to Solarized Default
-          </Button>
-        </Group>
+        <Card.Section>
+          <Divider />
+        </Card.Section>
+        <Button
+          variant="light"
+          color="red"
+          onClick={() => setTheme(SOLARIZED_DEFAULT)}
+        >
+          Reset to Solarized Default
+        </Button>
       </Stack>
     </Card>
   );
