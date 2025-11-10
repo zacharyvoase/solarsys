@@ -8,6 +8,12 @@
   border: none;
   border-radius: var(--mantine-radius-sm);
 
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
+  grid-auto-flow: dense;
+  column-gap: var(--mantine-spacing-md);
+
   &.selected {
     outline: 1px solid var(--mantine-color-blue-7);
     box-shadow: 0 0 3px 2px var(--mantine-color-blue-7);
@@ -16,5 +22,53 @@
   [data-mantine-color-scheme='dark'] &.selected {
     outline: 1px solid var(--mantine-color-blue-3);
     box-shadow: 0 0 3px 2px var(--mantine-color-blue-3);
+  }
+
+  .name {
+    grid-column: 1 / span 1;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .hex {
+    grid-column: 1 / span 1;
+  }
+
+  .uses,
+  .contrasts {
+    font-family: var(--mantine-font-family);
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0;
+    padding: 0;
+    li {
+      display: block;
+    }
+  }
+
+  .uses {
+    grid-column: 1 / span 1;
+    margin-top: 4px;
+    li {
+      white-space: nowrap;
+    }
+  }
+
+  .contrasts {
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 2;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: right;
+    font-feature-settings: 'tnum';
+    font-variant-numeric: tabular-nums;
+    li {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--mantine-spacing-xs);
+      .contrastLabel {
+        color: color-mix(in srgb, var(--fg-color), transparent 25%);
+      }
+    }
   }
 }

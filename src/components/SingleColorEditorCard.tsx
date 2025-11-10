@@ -1,4 +1,4 @@
-import { Card, Input, Stack, Text } from '@mantine/core';
+import { Card, Group, Stack, Text } from '@mantine/core';
 import type Color from 'colorjs.io';
 import { useAtom } from 'jotai';
 
@@ -35,9 +35,9 @@ function EditorCard({
 
   return (
     <Card style={{ gridArea: 'EditorCard' }}>
-      <Stack>
+      <Stack gap="md">
         <CardTitle>Edit {selectedColorName}</CardTitle>
-        <Input.Wrapper label="Hue" description={color.h!.toFixed(0)}>
+        <SliderWrapper label="Hue" value={color.h!.toFixed(0)}>
           <OKComponentSlider
             baseColor={color}
             component="hue"
@@ -46,8 +46,8 @@ function EditorCard({
               setSelectedColor((c) => setOkHslComponent(c, 'hue', h));
             }}
           />
-        </Input.Wrapper>
-        <Input.Wrapper label="Saturation" description={color.s!.toFixed(2)}>
+        </SliderWrapper>
+        <SliderWrapper label="Saturation" value={color.s!.toFixed(2)}>
           <OKComponentSlider
             baseColor={color}
             component="saturation"
@@ -56,8 +56,8 @@ function EditorCard({
               setSelectedColor((c) => setOkHslComponent(c, 'saturation', s));
             }}
           />
-        </Input.Wrapper>
-        <Input.Wrapper label="Lightness" description={color.l!.toFixed(2)}>
+        </SliderWrapper>
+        <SliderWrapper label="Lightness" value={color.l!.toFixed(2)}>
           <OKComponentSlider
             baseColor={color}
             component="lightness"
@@ -66,9 +66,33 @@ function EditorCard({
               setSelectedColor((c) => setOkHslComponent(c, 'lightness', l));
             }}
           />
-        </Input.Wrapper>
+        </SliderWrapper>
       </Stack>
     </Card>
+  );
+}
+
+function SliderWrapper({
+  label,
+  value,
+  children,
+}: {
+  label: string;
+  value: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Stack gap="xs">
+      <Group justify="space-between">
+        <Text component="span" size="sm" fw={500} variant="text">
+          {label}
+        </Text>
+        <Text component="span" c="dimmed" fw={400} size="sm">
+          {value}
+        </Text>
+      </Group>
+      {children}
+    </Stack>
   );
 }
 

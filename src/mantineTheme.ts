@@ -9,7 +9,7 @@ export const theme = createTheme({
   primaryShade: { light: 7, dark: 7 },
   primaryColor: 'green',
   fontFamily:
-    '"DM Sans", -apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    '"Stack Sans Text", -apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
   fontFamilyMonospace: '"JetBrains Mono", monospace',
   colors: {
     dark: [
@@ -26,7 +26,7 @@ export const theme = createTheme({
     ],
   },
   headings: {
-    fontFamily: '"Russo One", sans-serif',
+    fontFamily: '"Stack Sans Text", sans-serif',
     fontWeight: '400',
   },
   components: {

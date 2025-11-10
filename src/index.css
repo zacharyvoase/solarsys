@@ -43,6 +43,7 @@ body {
 }
 
 h1 {
+  font-family: 'Stack Sans Notch', sans-serif !important;
   text-transform: lowercase;
 }
 

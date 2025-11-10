@@ -21,7 +21,7 @@ export default function ThemeDisplay() {
             gridTemplateColumns: 'repeat(2, 1fr)',
             gridTemplateRows: 'repeat(8, auto)',
             gridAutoFlow: 'column',
-            gap: 'var(--mantine-spacing-md)',
+            gap: 'var(--mantine-spacing-xs)',
           }}
         >
           <ColorBox name="base03" uses={['dark bg']} />
@@ -114,32 +114,46 @@ function ColorBox({
       style={{
         backgroundColor: color.to('srgb').toString(),
         color: fgColor,
+        '--fg-color': fgColor,
       }}
       onClick={onClick}
     >
-      <span style={{ fontWeight: 'bold', fontSize: '14px' }}>{name}</span>
-      <br />
-      <span style={{ fontSize: '14px' }}>
+      <span
+        className={classes.name}
+        style={{ fontWeight: 'bold', fontSize: '14px' }}
+      >
+        {name}
+      </span>
+      <span className={classes.hex} style={{ fontSize: '14px' }}>
         {color.to('srgb').toString({ format: 'hex' })}
       </span>
       {uses ? (
-        <>
-          <br />
-          {uses.join(' • ')}
-        </>
+        <ul className={classes.uses} style={{ fontSize: '12px' }}>
+          {uses.map((use) => (
+            <li key={use}>{use}</li>
+          ))}
+        </ul>
       ) : null}
-      {contrastDark && (
-        <>
-          <br />
-          Dark: {theme.darkBg.contrast(color, 'APCA').toFixed(1)}
-        </>
-      )}
-      {contrastLight && (
-        <>
-          <br />
-          Light: {theme.lightBg.contrast(color, 'APCA').toFixed(1)}
-        </>
-      )}
+      {contrastDark || contrastLight ? (
+        <ul className={classes.contrasts}>
+          {contrastDark && (
+            <li>
+              <span className={classes.contrastLabel}>Dark</span>
+              <span className={classes.contrastValue}>
+                {theme.darkBg.contrast(color, 'APCA').toFixed(1)}
+              </span>
+            </li>
+          )}
+          {contrastLight && (
+            <li>
+              <span className={classes.contrastLabel}>Light</span>
+              <span className={classes.contrastValue}>
+                {theme.lightBg.contrast(color, 'APCA').toFixed(1)}
+              </span>
+            </li>
+          )}
+        </ul>
+      ) : null}
     </Box>
   );
 }
