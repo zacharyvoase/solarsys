@@ -2,17 +2,17 @@
   background-image:
     radial-gradient(
       circle at 20% 30%,
-      color-mix(in srgb, var(--mantine-color-grape-2) 50%, transparent 50%),
+      color-mix(in srgb, var(--mantine-color-grape-3) 40%, transparent),
       transparent 40%
     ),
     radial-gradient(
       circle at 80% 20%,
-      color-mix(in srgb, var(--mantine-color-orange-2) 50%, transparent 50%),
+      color-mix(in srgb, var(--mantine-color-orange-3) 40%, transparent),
       transparent 40%
     ),
     radial-gradient(
       circle at 40% 80%,
-      color-mix(in srgb, var(--mantine-color-blue-2) 50%, transparent 50%),
+      color-mix(in srgb, var(--mantine-color-blue-3) 40%, transparent),
       transparent 40%
     );
   background-attachment: fixed;
@@ -23,18 +23,18 @@
   background-image:
     radial-gradient(
       circle at 20% 30%,
-      color-mix(in srgb, var(--mantine-color-grape-9) 50%, transparent 50%),
-      transparent 40%
+      color-mix(in srgb, var(--mantine-color-grape-9) 40%, transparent),
+      transparent 60%
     ),
     radial-gradient(
       circle at 80% 20%,
-      color-mix(in srgb, var(--mantine-color-orange-9) 50%, transparent 50%),
-      transparent 40%
+      color-mix(in srgb, var(--mantine-color-orange-9) 40%, transparent),
+      transparent 50%
     ),
     radial-gradient(
-      circle at 40% 80%,
-      color-mix(in srgb, var(--mantine-color-blue-9) 50%, transparent 50%),
-      transparent 40%
+      circle at 50% 80%,
+      color-mix(in srgb, var(--mantine-color-blue-9) 40%, transparent),
+      transparent 50%
     );
   background-color: color-mix(
     in srgb,
@@ -70,7 +70,35 @@ h6 {
     var(--mantine-color-body),
     transparent 50%
   );
-  backdrop-filter: blur(10px);
+
+  backdrop-filter: blur(10px) saturate(180%);
+
+  @media (prefers-color-scheme: dark) {
+    background-color: color-mix(
+      in srgb,
+      var(--mantine-color-body),
+      transparent 92%
+    );
+    backdrop-filter: blur(10px) saturate(140%);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(255, 255, 255, 0.1) 100%
+    ); /* Gradient for a reflective shine */
+    opacity: 0.5;
+    border-radius: var(--mantine-radius-md);
+    pointer-events: none; /* Allows interaction with content underneath */
+  }
 }
 
 .input-transparent {

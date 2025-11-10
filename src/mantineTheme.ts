@@ -33,6 +33,7 @@ export const theme = createTheme({
     Card: {
       defaultProps: {
         shadow: 'md',
+        bdrs: 'md',
       },
     },
     Paper: {
