@@ -1,37 +1,17 @@
-import {
-  Box,
-  Button,
-  Card,
-  Stack,
-  Switch,
-  CopyButton,
-  ActionIcon,
-  Tooltip,
-  Group,
-} from '@mantine/core';
-import { IconCheck, IconShare } from '@tabler/icons-react';
+import { Box, Button, Card, Stack, Switch, Group } from '@mantine/core';
 import { useAtom } from 'jotai';
 
-import { createShareableURL } from '../serialization';
 import {
   SOLARIZED_DEFAULT,
   type SolarizedThemeColorName,
   getFgColor,
 } from '../solarized';
-import {
-  themeAtom,
-  selectedColorAtom,
-  preferencesAtom,
-  themeNameAtom,
-} from '../state';
+import { themeAtom, selectedColorAtom, preferencesAtom } from '../state';
 import classes from './ThemeDisplay.module.css';
 
 export default function ThemeDisplay() {
   const [preferences, setPreferences] = useAtom(preferencesAtom);
-  const [theme, setTheme] = useAtom(themeAtom);
-  const [themeName] = useAtom(themeNameAtom);
-
-  const shareableURL = createShareableURL(theme, themeName);
+  const [, setTheme] = useAtom(themeAtom);
 
   return (
     <Card padding="md" style={{ gridArea: 'ThemeDisplay' }}>
@@ -110,23 +90,6 @@ export default function ThemeDisplay() {
           >
             Reset to Solarized Default
           </Button>
-          <CopyButton value={shareableURL} timeout={2000}>
-            {({ copied, copy }) => (
-              <Tooltip
-                label={copied ? 'Copied!' : 'Copy shareable link'}
-                withArrow
-              >
-                <ActionIcon
-                  color={copied ? 'teal' : 'blue'}
-                  variant="light"
-                  onClick={copy}
-                  size="lg"
-                >
-                  {copied ? <IconCheck size={18} /> : <IconShare size={18} />}
-                </ActionIcon>
-              </Tooltip>
-            )}
-          </CopyButton>
         </Group>
       </Stack>
     </Card>
