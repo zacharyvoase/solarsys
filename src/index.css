@@ -105,6 +105,24 @@ h6 {
   background-color: color-mix(in srgb, var(--input-bg), transparent 50%);
 }
 
+.tab-hover:hover {
+  background-color: color-mix(
+    in srgb,
+    var(--mantine-color-body),
+    transparent 50%
+  );
+  backdrop-filter: blur(10px) saturate(180%);
+
+  /* @media (prefers-color-scheme: dark) {
+    background-color: color-mix(
+      in srgb,
+      var(--mantine-color-body),
+      transparent 65%
+    );
+    backdrop-filter: blur(10px) saturate(140%);
+  } */
+}
+
 .divider {
   border: none;
   height: 1px;

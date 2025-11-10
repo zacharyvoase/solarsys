@@ -1,0 +1,11 @@
+.codeBlock {
+  font-size: 12px;
+  line-height: 1.5;
+  font-family: var(--mantine-font-family-monospace);
+  white-space: pre;
+  overflow-x: auto;
+
+  @media (min-width: $mantine-breakpoint-xl) {
+    width: 600px;
+  }
+}

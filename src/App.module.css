@@ -6,15 +6,25 @@
   gap: var(--mantine-spacing-sm);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto auto 1fr auto;
   grid-template-areas:
     'header header'
     'ThemeDisplay EditorCard'
-    'ThemeDisplay PreviewCard';
+    'ThemeDisplay PreviewCard'
+    'OutputCard OutputCard';
 
   .header {
     grid-area: header;
     justify-self: center;
+  }
+
+  @media (min-width: $mantine-breakpoint-xl) {
+    grid-template-columns: auto auto 1fr;
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+      'header header header'
+      'ThemeDisplay EditorCard OutputCard'
+      'ThemeDisplay PreviewCard OutputCard';
   }
 
   @media (max-width: $mantine-breakpoint-md) {
@@ -25,7 +35,8 @@
       'header'
       'ThemeDisplay'
       'EditorCard'
-      'PreviewCard';
+      'PreviewCard'
+      'OutputCard';
 
     h1 {
       grid-column: 1 / span 1;

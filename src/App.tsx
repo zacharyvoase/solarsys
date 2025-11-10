@@ -1,6 +1,7 @@
 import { Group, MantineProvider, Title } from '@mantine/core';
 
 import classes from './App.module.css';
+import OutputCard from './components/OutputCard';
 import PreviewCard from './components/PreviewCard';
 import SingleColorEditorCard from './components/SingleColorEditorCard';
 import ThemeDisplay from './components/ThemeDisplay';
@@ -17,6 +18,7 @@ function App() {
         <ThemeDisplay />
         <PreviewCard />
         <SingleColorEditorCard />
+        <OutputCard />
       </div>
     </MantineProvider>
   );

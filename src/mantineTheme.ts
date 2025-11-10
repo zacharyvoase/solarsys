@@ -51,5 +51,10 @@ export const theme = createTheme({
         input: 'input-transparent',
       },
     },
+    Tabs: {
+      classNames: {
+        tab: 'tab-hover',
+      },
+    },
   },
 });
