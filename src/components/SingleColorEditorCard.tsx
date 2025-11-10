@@ -13,8 +13,12 @@ export default function SingleColorEditorCard() {
   if (!selectedColor) {
     return (
       <Card style={{ gridArea: 'EditorCard' }}>
-        <CardTitle>Edit</CardTitle>
-        <Text variant="text">Select a color to edit</Text>
+        <Stack gap="md">
+          <CardTitle>Edit</CardTitle>
+          <Text variant="text" c="dimmed">
+            Select a color to edit
+          </Text>
+        </Stack>
       </Card>
     );
   } else {
@@ -36,7 +40,7 @@ function EditorCard({
   return (
     <Card style={{ gridArea: 'EditorCard' }}>
       <Stack gap="md">
-        <CardTitle>Edit {selectedColorName}</CardTitle>
+        <CardTitle>Edit: {selectedColorName}</CardTitle>
         <SliderWrapper label="Hue" value={color.h!.toFixed(0)}>
           <OKComponentSlider
             baseColor={color}
