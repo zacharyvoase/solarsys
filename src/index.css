@@ -1,4 +1,4 @@
-body {
+:root {
   background-image:
     radial-gradient(
       circle at 20% 30%,
@@ -16,9 +16,10 @@ body {
       transparent 40%
     );
   background-attachment: fixed;
+  background-size: cover;
 }
 
-[data-mantine-color-scheme='dark'] body {
+:root[data-mantine-color-scheme='dark'] {
   background-image:
     radial-gradient(
       circle at 20% 30%,
@@ -40,6 +41,14 @@ body {
     var(--mantine-color-dark-8),
     transparent 30%
   );
+}
+
+body {
+  background: none;
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 h1 {
