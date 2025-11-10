@@ -68,6 +68,7 @@
       gap: var(--mantine-spacing-xs);
       .contrastLabel {
         color: color-mix(in srgb, var(--fg-color), transparent 25%);
+        text-transform: lowercase;
       }
     }
   }
