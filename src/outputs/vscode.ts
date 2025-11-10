@@ -8,9 +8,9 @@ function hexColor(
   return theme.get(colorName).to('srgb').toString({ format: 'hex' });
 }
 
-function exportVSCodeDark(theme: SolarizedTheme): string {
+function exportVSCodeDark(theme: SolarizedTheme, themeName: string): string {
   const result = {
-    name: 'Solarized Dark (Custom)',
+    name: themeName,
     type: 'dark',
     colors: {
       'editor.background': hexColor(theme, 'base03'),
@@ -187,9 +187,9 @@ function exportVSCodeDark(theme: SolarizedTheme): string {
   return JSON.stringify(result, null, 2);
 }
 
-function exportVSCodeLight(theme: SolarizedTheme): string {
+function exportVSCodeLight(theme: SolarizedTheme, themeName: string): string {
   const result = {
-    name: 'Solarized Light (Custom)',
+    name: themeName,
     type: 'light',
     colors: {
       'editor.background': hexColor(theme, 'base3'),

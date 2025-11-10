@@ -7,7 +7,7 @@ export interface ExporterConfig {
   fileExtension?: string;
   fileName?: string;
   colorScheme?: 'dark' | 'light';
-  export: (theme: SolarizedTheme) => string;
+  export: (theme: SolarizedTheme, themeName: string) => string;
 }
 
 export interface ExporterCategory {

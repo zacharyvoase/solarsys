@@ -28,10 +28,10 @@ function exportSimpleJSON(theme: SolarizedTheme): string {
   return JSON.stringify(colors, null, 2);
 }
 
-function exportDetailedJSON(theme: SolarizedTheme): string {
+function exportDetailedJSON(theme: SolarizedTheme, themeName: string): string {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const result: Record<string, any> = {
-    name: 'Custom Solarized',
+    name: themeName,
     colors: {},
     ansiColors: {
       dark: {},

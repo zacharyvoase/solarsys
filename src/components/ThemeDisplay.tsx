@@ -1,17 +1,38 @@
-import { Box, Button, Card, Stack, Switch } from '@mantine/core';
+import {
+  Box,
+  Button,
+  Card,
+  Stack,
+  Switch,
+  CopyButton,
+  ActionIcon,
+  Tooltip,
+  Group,
+} from '@mantine/core';
+import { IconCheck, IconShare } from '@tabler/icons-react';
 import { useAtom } from 'jotai';
 
+import { createShareableURL } from '../serialization';
 import {
   SOLARIZED_DEFAULT,
   type SolarizedThemeColorName,
   getFgColor,
 } from '../solarized';
-import { themeAtom, selectedColorAtom, preferencesAtom } from '../state';
+import {
+  themeAtom,
+  selectedColorAtom,
+  preferencesAtom,
+  themeNameAtom,
+} from '../state';
 import classes from './ThemeDisplay.module.css';
 
 export default function ThemeDisplay() {
   const [preferences, setPreferences] = useAtom(preferencesAtom);
-  const [, setTheme] = useAtom(themeAtom);
+  const [theme, setTheme] = useAtom(themeAtom);
+  const [themeName] = useAtom(themeNameAtom);
+
+  const shareableURL = createShareableURL(theme, themeName);
+
   return (
     <Card padding="md" style={{ gridArea: 'ThemeDisplay' }}>
       <Stack>
@@ -81,9 +102,32 @@ export default function ThemeDisplay() {
             }));
           }}
         />
-        <Button variant="light" onClick={() => setTheme(SOLARIZED_DEFAULT)}>
-          Reset to Solarized Default
-        </Button>
+        <Group justify="space-between" wrap="nowrap">
+          <Button
+            variant="light"
+            onClick={() => setTheme(SOLARIZED_DEFAULT)}
+            style={{ flex: 1 }}
+          >
+            Reset to Solarized Default
+          </Button>
+          <CopyButton value={shareableURL} timeout={2000}>
+            {({ copied, copy }) => (
+              <Tooltip
+                label={copied ? 'Copied!' : 'Copy shareable link'}
+                withArrow
+              >
+                <ActionIcon
+                  color={copied ? 'teal' : 'blue'}
+                  variant="light"
+                  onClick={copy}
+                  size="lg"
+                >
+                  {copied ? <IconCheck size={18} /> : <IconShare size={18} />}
+                </ActionIcon>
+              </Tooltip>
+            )}
+          </CopyButton>
+        </Group>
       </Stack>
     </Card>
   );

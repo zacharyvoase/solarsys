@@ -117,3 +117,10 @@ export const preferencesAtom = atomWithStorage<Preferences>(
   undefined,
   { getOnInit: true }
 );
+
+export const themeNameAtom = atomWithStorage<string>(
+  'themeName',
+  'SolarSystem',
+  undefined,
+  { getOnInit: true }
+);

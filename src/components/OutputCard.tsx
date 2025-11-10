@@ -11,47 +11,56 @@ import {
   ActionIcon,
   Tooltip,
   NativeSelect,
+  TextInput,
 } from '@mantine/core';
 import { IconCheck, IconCopy, IconDownload } from '@tabler/icons-react';
 import { useAtom } from 'jotai';
+import { useDarkMode } from 'usehooks-ts';
 
 import { EXPORTER_CATEGORIES } from '../outputs';
 import type { ExporterConfig } from '../outputs/types';
-import { themeAtom } from '../state';
+import { themeAtom, themeNameAtom } from '../state';
 import CardTitle from './CardTitle';
 import classes from './OutputCard.module.css';
 
 export default function OutputCard() {
+  const { isDarkMode } = useDarkMode();
   const [theme] = useAtom(themeAtom);
+  const [themeName, setThemeName] = useAtom(themeNameAtom);
   const [selectedExporter, setSelectedExporter] = useState<ExporterConfig>(
     EXPORTER_CATEGORIES[0].exporters[0]
   );
 
-  const output = selectedExporter.export(theme);
+  // Compute full theme name with mode suffix
+  const fullThemeName = selectedExporter.colorScheme
+    ? `${themeName} (${selectedExporter.colorScheme === 'dark' ? 'Dark' : 'Light'})`
+    : themeName;
 
-  // Determine colors based on exporter's color scheme
-  const bgColor =
-    selectedExporter.colorScheme === 'dark'
-      ? theme.darkBg.to('srgb').toString({ format: 'hex' })
-      : selectedExporter.colorScheme === 'light'
-        ? theme.lightBg.to('srgb').toString({ format: 'hex' })
-        : undefined;
+  const output = selectedExporter.export(theme, fullThemeName);
 
-  const fgColor =
-    selectedExporter.colorScheme === 'dark'
-      ? theme.darkFg.to('srgb').toString({ format: 'hex' })
-      : selectedExporter.colorScheme === 'light'
-        ? theme.lightFg.to('srgb').toString({ format: 'hex' })
-        : undefined;
+  // Determine colors based on the current color scheme
+  const bgColor = theme
+    .bg(isDarkMode ? 'dark' : 'light')
+    .to('srgb')
+    .toString({ format: 'hex' });
+  const fgColor = theme
+    .fg(isDarkMode ? 'dark' : 'light')
+    .to('srgb')
+    .toString({ format: 'hex' });
 
   const handleDownload = () => {
     const blob = new Blob([output], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download =
-      selectedExporter.fileName ||
-      `export.${selectedExporter.fileExtension || 'txt'}`;
+
+    // Generate filename using theme name
+    const sanitizedName = fullThemeName
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-');
+    const defaultFilename = `${sanitizedName}.${selectedExporter.fileExtension || 'txt'}`;
+    a.download = selectedExporter.fileName || defaultFilename;
+
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -62,6 +71,13 @@ export default function OutputCard() {
     <Card padding="md" style={{ gridArea: 'OutputCard' }}>
       <Stack gap="md">
         <CardTitle>Output</CardTitle>
+
+        <TextInput
+          label="Theme Name"
+          value={themeName}
+          onChange={(event) => setThemeName(event.currentTarget.value)}
+          placeholder="Enter theme name"
+        />
 
         <Tabs
           defaultValue={EXPORTER_CATEGORIES[0].id}
@@ -105,8 +121,8 @@ export default function OutputCard() {
 
         <Stack gap="xs">
           <Group justify="space-between">
-            <Text size="sm" fw={500}>
-              {selectedExporter.name}
+            <Text size="xs" c="dimmed">
+              {selectedExporter.description}
             </Text>
             <Group gap="xs">
               <CopyButton value={output} timeout={2000}>
@@ -137,12 +153,9 @@ export default function OutputCard() {
               </Tooltip>
             </Group>
           </Group>
-          <Text size="xs" c="dimmed">
-            {selectedExporter.description}
-          </Text>
         </Stack>
 
-        <ScrollArea h="50vh" type="auto">
+        <ScrollArea h="60vh" type="auto" bdrs="sm">
           <Code
             block
             className={classes.codeBlock}
