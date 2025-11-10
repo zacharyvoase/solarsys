@@ -36,6 +36,11 @@ export const theme = createTheme({
         bdrs: 'md',
       },
     },
+    Divider: {
+      classNames: {
+        root: 'divider',
+      },
+    },
     Paper: {
       classNames: {
         root: 'paper-transparent',

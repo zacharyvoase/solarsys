@@ -104,3 +104,14 @@ h6 {
 .input-transparent {
   background-color: color-mix(in srgb, var(--input-bg), transparent 50%);
 }
+
+.divider {
+  border: none;
+  height: 1px;
+  background-color: color-mix(in srgb, #000, transparent 90%);
+  backdrop-filter: saturate(180%);
+
+  [data-mantine-color-scheme='dark'] & {
+    background-color: color-mix(in srgb, #fff, transparent 90%);
+  }
+}

@@ -1,4 +1,4 @@
-import { Card, Group, Stack, Text } from '@mantine/core';
+import { Card, Divider, Group, Stack, Text } from '@mantine/core';
 import type Color from 'colorjs.io';
 import { useAtom } from 'jotai';
 
@@ -6,6 +6,7 @@ import { clampAndRound, type SolarizedThemeColorName } from '../solarized';
 import { selectedColorAtom, singleColorAtomFamily } from '../state';
 import CardTitle from './CardTitle';
 import { OKComponentSlider } from './hueslider/OKHueSlider';
+import TextFormat from './TextFormat';
 
 export default function SingleColorEditorCard() {
   const [selectedColor] = useAtom(selectedColorAtom);
@@ -82,6 +83,13 @@ function EditorCard({
             }}
           />
         </SliderWrapper>
+        <Card.Section>
+          <Divider />
+        </Card.Section>
+        <TextFormat
+          color={color}
+          setColor={(c) => setSelectedColor(clampAndRound(c.to('okhsl')))}
+        />
       </Stack>
     </Card>
   );
