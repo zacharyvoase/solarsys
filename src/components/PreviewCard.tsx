@@ -20,7 +20,7 @@ export default function PreviewCard() {
         <PreviewBlock mode="light" />
         <Input.Wrapper label="Font Size (px)" mb="lg">
           <Slider
-            label={preferences.fontSize}
+            label={preferences.fontSize ?? 14}
             min={8}
             max={24}
             step={1}
@@ -31,7 +31,7 @@ export default function PreviewCard() {
               { value: 20, label: '20' },
               { value: 24, label: '24' },
             ]}
-            value={preferences.fontSize}
+            value={preferences.fontSize ?? 14}
             onChange={(value) => {
               setPreferences({ ...preferences, fontSize: value });
             }}
