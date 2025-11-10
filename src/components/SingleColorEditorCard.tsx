@@ -40,7 +40,18 @@ function EditorCard({
   return (
     <Card style={{ gridArea: 'EditorCard' }}>
       <Stack gap="md">
-        <CardTitle>Edit: {selectedColorName}</CardTitle>
+        <CardTitle>
+          Edit{' '}
+          <span
+            style={{
+              fontWeight: 800,
+              fontVariantNumeric: 'tabular-nums',
+              fontFeatureSettings: "'tnum'",
+            }}
+          >
+            {selectedColorName}
+          </span>
+        </CardTitle>
         <SliderWrapper label="Hue" value={color.h!.toFixed(0)}>
           <OKComponentSlider
             baseColor={color}
