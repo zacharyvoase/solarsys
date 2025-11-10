@@ -1,4 +1,4 @@
-import { Box, Card, Input, Slider, Stack } from '@mantine/core';
+import { Card, Code, Input, Slider, Stack } from '@mantine/core';
 import { useAtom } from 'jotai';
 
 import { preferencesAtom, selectedColorAtom, themeAtom } from '../state';
@@ -47,13 +47,16 @@ function PreviewBlock({ mode }: { mode: 'dark' | 'light' }) {
   const [preferences] = useAtom(preferencesAtom);
   const [, setSelectedColor] = useAtom(selectedColorAtom);
   return (
-    <Box
-      className={classes.previewCard}
-      component="p"
+    <Code
+      block
+      className={classes.previewBlock}
       style={{
-        backgroundColor: theme.bg(mode).to('srgb').toString(),
-        color: theme.fg(mode).to('srgb').toString(),
-        '--selection-bg-color': theme.highlight(mode).to('srgb').toString(),
+        backgroundColor: theme.bg(mode).to('srgb').toString({ format: 'hex' }),
+        color: theme.fg(mode).to('srgb').toString({ format: 'hex' }),
+        '--selection-bg-color': theme
+          .highlight(mode)
+          .to('srgb')
+          .toString({ format: 'hex' }),
         fontSize: preferences.fontSize ?? 14,
       }}
       onClick={() => setSelectedColor(mode === 'dark' ? 'base03' : 'base3')}
@@ -75,7 +78,7 @@ function PreviewBlock({ mode }: { mode: 'dark' | 'light' }) {
       <PreviewChunk slot="blue" />
       <PreviewChunk slot="cyan" />
       <PreviewChunk slot="green" />
-    </Box>
+    </Code>
   );
 }
 
@@ -97,9 +100,9 @@ function PreviewChunk({
           fontWeight: slot.endsWith('Emphasis') ? 'bold' : 'normal',
           color: slot.endsWith('Highlight')
             ? 'inherit'
-            : theme.get(slot).to('srgb').toString(),
+            : theme.get(slot).to('srgb').toString({ format: 'hex' }),
           backgroundColor: slot.endsWith('Highlight')
-            ? theme.get(slot).to('srgb').toString()
+            ? theme.get(slot).to('srgb').toString({ format: 'hex' })
             : undefined,
         }}
       >

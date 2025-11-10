@@ -12,8 +12,15 @@ import {
   Tooltip,
   NativeSelect,
   TextInput,
+  Input,
+  Button,
 } from '@mantine/core';
-import { IconCheck, IconCopy, IconDownload } from '@tabler/icons-react';
+import {
+  IconCheck,
+  IconCopy,
+  IconDownload,
+  IconShare,
+} from '@tabler/icons-react';
 import { useAtom } from 'jotai';
 import { useDarkMode } from 'usehooks-ts';
 
@@ -22,6 +29,7 @@ import type { ExporterConfig } from '../outputs/types';
 import { themeAtom, themeNameAtom } from '../state';
 import CardTitle from './CardTitle';
 import classes from './OutputCard.module.css';
+import { createShareableURL } from '../serialization';
 
 export default function OutputCard() {
   const { isDarkMode } = useDarkMode();
@@ -35,6 +43,8 @@ export default function OutputCard() {
   const fullThemeName = selectedExporter.colorScheme
     ? `${themeName} (${selectedExporter.colorScheme === 'dark' ? 'Dark' : 'Light'})`
     : themeName;
+
+  const shareableURL = createShareableURL(theme, themeName);
 
   const output = selectedExporter.export(theme, fullThemeName);
 
@@ -72,12 +82,38 @@ export default function OutputCard() {
       <Stack gap="md">
         <CardTitle>Output</CardTitle>
 
-        <TextInput
-          label="Theme Name"
-          value={themeName}
-          onChange={(event) => setThemeName(event.currentTarget.value)}
-          placeholder="Enter theme name"
-        />
+        <Input.Wrapper label="Theme Name">
+          <Group gap="xs">
+            <TextInput
+              styles={{ root: { flexGrow: 1 } }}
+              value={themeName}
+              onChange={(event) => setThemeName(event.currentTarget.value)}
+              placeholder="Enter theme name"
+            />
+            <CopyButton value={shareableURL} timeout={2000}>
+              {({ copied, copy }) => (
+                <Tooltip
+                  label={
+                    copied ? 'Copied!' : 'Copy a shareable link to this theme'
+                  }
+                  withArrow
+                >
+                  <Button
+                    color={copied ? 'teal' : 'blue'}
+                    variant="light"
+                    onClick={copy}
+                    size="sm"
+                    rightSection={
+                      copied ? <IconCheck size={18} /> : <IconShare size={18} />
+                    }
+                  >
+                    Copy Shareable Link
+                  </Button>
+                </Tooltip>
+              )}
+            </CopyButton>
+          </Group>
+        </Input.Wrapper>
 
         <Tabs
           defaultValue={EXPORTER_CATEGORIES[0].id}

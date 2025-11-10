@@ -1,8 +1,8 @@
-.previewCard {
+.previewBlock {
   margin: 0;
   border-radius: var(--mantine-radius-sm);
   padding: var(--mantine-spacing-md);
-  font-family: var(--mantine-font-family-monospace);
+  isolation: isolate;
 
   @media (min-width: $mantine-breakpoint-md) {
     width: 480px;
