@@ -1,21 +1,42 @@
-import { Box, Card, Stack } from '@mantine/core';
+import { Box, Card, Input, Slider, Stack } from '@mantine/core';
 import { useAtom } from 'jotai';
 
-import { selectedColorAtom, themeAtom } from '../state';
+import { preferencesAtom, selectedColorAtom, themeAtom } from '../state';
 import CardTitle from './CardTitle';
 import {
   resolveSlotToColorName,
   type SolarizedThemeColorName,
   type SolarizedThemeSlot,
 } from '../solarized';
+import classes from './PreviewCard.module.css';
 
 export default function PreviewCard() {
+  const [preferences, setPreferences] = useAtom(preferencesAtom);
   return (
     <Card style={{ gridArea: 'PreviewCard', alignSelf: 'start' }}>
       <Stack>
         <CardTitle>Preview</CardTitle>
         <PreviewBlock mode="dark" />
         <PreviewBlock mode="light" />
+        <Input.Wrapper label="Font Size (px)" mb="lg">
+          <Slider
+            label={preferences.fontSize}
+            min={8}
+            max={24}
+            step={1}
+            marks={[
+              { value: 8, label: '8' },
+              { value: 12, label: '12' },
+              { value: 16, label: '16' },
+              { value: 20, label: '20' },
+              { value: 24, label: '24' },
+            ]}
+            value={preferences.fontSize}
+            onChange={(value) => {
+              setPreferences({ ...preferences, fontSize: value });
+            }}
+          />
+        </Input.Wrapper>
       </Stack>
     </Card>
   );
@@ -23,17 +44,19 @@ export default function PreviewCard() {
 
 function PreviewBlock({ mode }: { mode: 'dark' | 'light' }) {
   const [theme] = useAtom(themeAtom);
+  const [preferences] = useAtom(preferencesAtom);
+  const [, setSelectedColor] = useAtom(selectedColorAtom);
   return (
     <Box
+      className={classes.previewCard}
       component="p"
-      m={0}
-      bdrs="sm"
-      p="md"
-      ff="monospace"
       style={{
         backgroundColor: theme.bg(mode).to('srgb').toString(),
         color: theme.fg(mode).to('srgb').toString(),
+        '--selection-bg-color': theme.highlight(mode).to('srgb').toString(),
+        fontSize: preferences.fontSize ?? 14,
       }}
+      onClick={() => setSelectedColor(mode === 'dark' ? 'base03' : 'base3')}
     >
       <PreviewChunk slot={mode === 'dark' ? 'darkFg' : 'lightFg'} />
       <PreviewChunk
@@ -66,7 +89,10 @@ function PreviewChunk({
   return (
     <>
       <span
-        onClick={() => setSelectedColor(resolveSlotToColorName(slot))}
+        onClick={(ev) => {
+          ev.stopPropagation();
+          setSelectedColor(resolveSlotToColorName(slot));
+        }}
         style={{
           fontWeight: slot.endsWith('Emphasis') ? 'bold' : 'normal',
           color: slot.endsWith('Highlight')

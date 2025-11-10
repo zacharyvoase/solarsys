@@ -1,0 +1,11 @@
+.previewCard {
+  margin: 0;
+  border-radius: var(--mantine-radius-sm);
+  padding: var(--mantine-spacing-md);
+  font-family: var(--mantine-font-family-monospace);
+  width: 480px;
+
+  &::selection {
+    background-color: var(--selection-bg-color);
+  }
+}

@@ -5,7 +5,7 @@
   margin-block: var(--mantine-spacing-sm);
   gap: var(--mantine-spacing-sm);
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto auto 1fr;
   grid-template-areas:
     'header header'
